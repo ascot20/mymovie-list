@@ -32,8 +32,8 @@ const SignUp = () => {
     return (
         <div className="flex flex-col min-h-screen bg-gray-100">
             <NavBarSignUp onLogin={onLogin} />
-            <div className="flex flex-col items-center justify-center flex-grow">
-                <div className="container mx-auto w-1/2 text-center mb-4">
+            <div className="flex flex-col items-center mt-20 justify-center flex-grow">
+                <div className="container mx-auto sm:w-1/2 text-center mb-4 p-4">
                     <h2 className=" text-lg sm:text-xl font-mono font-bold mb-2 text-indigo-400">Welcome to MyMovieList</h2>
                     <p className="text-sm sm:text-base text-gray-600">Create and manage your personalized list of top movies and TV shows. Explore other users' lists to discover new recommendations and connect with fellow movie enthusiasts.</p>
                 </div>

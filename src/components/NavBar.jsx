@@ -2,13 +2,11 @@
 import { useEffect, useState } from 'react'
 import logo from '../assets/me.png'
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
 import { auth } from '../firebase'
 
 const NavBar = () => {
   const [show, setShow] = useState(false)
   const [hide, setHide] = useState(true)
-  const dispatch = useDispatch()
 
   const handleTransition = () => {
     if (window.scrollY > 50) {

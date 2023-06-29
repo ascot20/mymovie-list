@@ -2,20 +2,30 @@ import { useState } from "react";
 import List from "./List";
 import ResultCard from "./ResultCard";
 
-const TopTvShowsList = ({movies, onAddToList,onRemoveFromList,onEdit}) => {
+const TopTvShowsList = ({movies, onAddToList,onRemoveFromList}) => {
   const [searchQuery, setSearchQuery] = useState("")
   const [results, setResults] = useState([])
 
-  const handleSearch = async (event) => {
+  const handleSearch = (event) => {
     const query = event.target.value
     setSearchQuery(query);
 
     if(query){
-      fetch(`https://api.themoviedb.org/3/search/movie?api_key=705b5a93838cd04cdf2520dc4def5b29&query=${searchQuery}&include_adultfalse`)
+      const options = {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MDViNWE5MzgzOGNkMDRjZGYyNTIwZGM0ZGVmNWIyOSIsInN1YiI6IjY0OTJjNjc0ZjlhYTQ3MDEwNjBlYjMxYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.2f3qE5DSHcuYU2_DKBoHc9mWPWQsTzNPcjMr-5r159M'
+        }
+      };
+      fetch(`https://api.themoviedb.org/3/search/tv?query=${searchQuery}&include_adult=false&language=en-US&page=1`,
+      options
+      )
       .then(res=>res.json())
       .then(data=>{
         if(!data.error){
           setResults(data.results)
+          console.log(results)
         }
         else{
                 setResults([])
@@ -28,9 +38,18 @@ const TopTvShowsList = ({movies, onAddToList,onRemoveFromList,onEdit}) => {
    
   }
 
-  const handleAddToList = () => {
+  const handleAddToList = (id) => {
+    const movie = results.find((result) => result.id === id)
     if(searchQuery.trim() !== ""){
-      onAddToList(searchQuery)
+      onAddToList(movie)
+      setSearchQuery("")
+    }
+    setResults([])
+  }
+
+  const handleAddToList2 = () => {   
+    if(searchQuery.trim() !== ""){
+      onAddToList({searchQuery})
       setSearchQuery("")
     }
     setResults([])
@@ -51,7 +70,7 @@ const TopTvShowsList = ({movies, onAddToList,onRemoveFromList,onEdit}) => {
           className="border border-gray-300 rounded-md px-4 py-2 w-full"
           />
           <button
-            onClick={handleAddToList}
+            onClick={handleAddToList2}
             className="ml-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2"
           >
             +
@@ -66,12 +85,13 @@ const TopTvShowsList = ({movies, onAddToList,onRemoveFromList,onEdit}) => {
                 return <ResultCard
                         key={result.id}
                         onAdd={handleAddToList}
-                        movie={result}/>
+                        movie={result}
+                        type={false}/>
               })}
             </ul>
           </div>
         )}
-        <List movies = {movies} onRemove={handleRemoveFromList} onEdit={onEdit}/>
+        <List movies = {movies} onRemove={handleRemoveFromList} type={false}/>
       </div>
     </div>
   )

@@ -2,11 +2,11 @@ import { useState } from "react"
 import List from "./List"
 import ResultCard from "./ResultCard"
 
-const TopMoviesList = ({onAddToList,movies,onRemoveFromList,onEdit}) => {
+const TopMoviesList = ({onAddToList,movies,onRemoveFromList}) => {
   const [searchQuery, setSearchQuery] = useState("")
   const [results, setResults] = useState([])
 
-  const handleSearch = async (event) => {
+  const handleSearch = (event) => {
     const query = event.target.value
     setSearchQuery(query);  
 
@@ -27,9 +27,18 @@ const TopMoviesList = ({onAddToList,movies,onRemoveFromList,onEdit}) => {
     }
   }
 
-  const handleAddToList = () => {
+  const handleAddToList = (id) => {
+    const movie = results.find((result) => result.id === id)
     if(searchQuery.trim() !== ""){
-      onAddToList(searchQuery)
+      onAddToList(movie)
+      setSearchQuery("")
+    }
+    setResults([])
+  }
+
+  const handleAddToList2 = () => {   
+    if(searchQuery.trim() !== ""){
+      onAddToList({searchQuery})
       setSearchQuery("")
     }
     setResults([])
@@ -50,7 +59,7 @@ const TopMoviesList = ({onAddToList,movies,onRemoveFromList,onEdit}) => {
           className="border border-gray-300 rounded-md px-4 py-2 w-full"
           />
           <button
-            onClick={handleAddToList}
+            onClick={handleAddToList2}
             className="ml-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2"
           >
             +
@@ -65,12 +74,13 @@ const TopMoviesList = ({onAddToList,movies,onRemoveFromList,onEdit}) => {
                 return <ResultCard 
                         key={result.id}
                         onAdd={handleAddToList}
-                        movie={result}/>
+                        movie={result}
+                        type = {true}/>
               })}
             </ul>
           </div>
         )}
-        <List movies = {movies} onRemove={handleRemoveFromList} onEdit={onEdit}/>
+        <List movies = {movies} onRemove={handleRemoveFromList} type={true}/>
       </div>
     </div>
   )

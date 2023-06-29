@@ -25,12 +25,6 @@ const SideBar = ({onItemClick}) => {
         active = {activateItem === 'top tv-shows'}
         onClick = {() => handleItemClick('top tv-shows')}
         />
-        <SideBarItem
-        label = "Upcoming"
-        icon = "📆"
-        active = {activateItem === 'upcoming'}
-        onClick = {() => handleItemClick('upcoming')}
-        />
         </ul>
     </aside>
   )
