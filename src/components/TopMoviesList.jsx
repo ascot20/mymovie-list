@@ -11,7 +11,7 @@ const TopMoviesList = ({onAddToList,movies,onRemoveFromList}) => {
     setSearchQuery(query);  
 
     if(query){
-      fetch(`https://api.themoviedb.org/3/search/movie?api_key=705b5a93838cd04cdf2520dc4def5b29&query=${searchQuery}&include_adultfalse`)
+      fetch(`https://api.themoviedb.org/3/search/movie?api_key=${import.meta.env.VITE_API_KEY}&query=${searchQuery}&include_adultfalse`)
       .then(res=>res.json())
       .then(data=>{
         if(!data.error){

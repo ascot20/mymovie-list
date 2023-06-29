@@ -15,7 +15,7 @@ const TopTvShowsList = ({movies, onAddToList,onRemoveFromList}) => {
         method: 'GET',
         headers: {
           accept: 'application/json',
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MDViNWE5MzgzOGNkMDRjZGYyNTIwZGM0ZGVmNWIyOSIsInN1YiI6IjY0OTJjNjc0ZjlhYTQ3MDEwNjBlYjMxYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.2f3qE5DSHcuYU2_DKBoHc9mWPWQsTzNPcjMr-5r159M'
+          Authorization: `Bearer ${import.meta.env.VITE_ACCESS_TOKEN}` 
         }
       };
       fetch(`https://api.themoviedb.org/3/search/tv?query=${searchQuery}&include_adult=false&language=en-US&page=1`,
