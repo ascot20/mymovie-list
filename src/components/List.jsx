@@ -22,7 +22,7 @@ const List = ({ movies, onRemove,type }) => {
               </div>
               <div className="flex">
                 <button className="text-red-500 hover:txt-red-700" onClick={() => onRemove(index)}>
-                  Remove
+                ❌
                 </button>
               </div>
             </li>

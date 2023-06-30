@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react'
-import logo from '../assets/me.png'
+import logo from '../assets/profile.png'
 import { Link } from 'react-router-dom'
 import { auth } from '../firebase'
 
@@ -29,7 +29,7 @@ const NavBar = () => {
     <div className={`fixed top-0 ${show && 'bg-slate-950'} w-screen h-14 p-3 px-6 z-1 ease-in transition-all`}>
       <div className="container mx-auto flex justify-between items-center">
         <Link to={`/`}>        
-        <h1 className={`${show ? ' text-slate-50' : 'text-slate-900'} font-mono cursor-pointer`}>MyMovieList</h1>
+        <h1 className={`${show ? ' text-slate-50' : 'text-slate-900'} font-mono cursor-pointer`}>MyMovieList🍿</h1>
         </Link>
         <div className="flex items-center justify-center">          
           <img src={logo} alt="logo" className="w-7 cursor-pointer" onClick={toggleMenu}/>
