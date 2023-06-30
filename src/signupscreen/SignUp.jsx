@@ -1,8 +1,9 @@
 import { useRef, useState } from "react"
 import { createUserWithEmailAndPassword } from "firebase/auth"
-import { auth } from '../firebase'
+import { auth, db } from '../firebase'
 import NavBarSignUp from "./NavBar"
 import Login from "../loginscreen/Login"
+import { doc, setDoc} from "firebase/firestore"
 
 const SignUp = () => {
     const emailRef = useRef(null)
@@ -13,9 +14,26 @@ const SignUp = () => {
 
     const onSignup = (e) => {
         e.preventDefault()
-
+        const username = usernameRef.current.value
+        const email = emailRef.current.value
         createUserWithEmailAndPassword(auth, emailRef.current.value, passwordRef.current.value)
-            .then((userCredential) => { const user = userCredential.user })
+            .then((userCred) => {
+                const userCollection = doc(db, `users/${email}`)              
+                const createUser = async()=>{
+                    try {
+                        await setDoc(userCollection,{
+                            id: userCred.user.uid,
+                            username: username,
+                            movies: [],
+                            tvShows: [],
+                            likes: [],
+                        })         
+                    } catch (error) {
+                        console.log('Error creating user',error)
+                    }
+                }
+                createUser()
+            })
             .catch((err) => {
                 alert(err.message)
             })

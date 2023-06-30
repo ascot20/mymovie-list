@@ -1,10 +1,14 @@
 import { useState } from "react"
 import List from "./List"
 import ResultCard from "./ResultCard"
+import { doc, getDoc, updateDoc } from "firebase/firestore"
+import { db } from "../firebase"
+import { useSelector } from "react-redux"
 
 const TopMoviesList = ({onAddToList,movies,onRemoveFromList}) => {
   const [searchQuery, setSearchQuery] = useState("")
   const [results, setResults] = useState([])
+  const {user} = useSelector((store) => store.user)
 
   const handleSearch = (event) => {
     const query = event.target.value
@@ -27,8 +31,9 @@ const TopMoviesList = ({onAddToList,movies,onRemoveFromList}) => {
     }
   }
 
-  const handleAddToList = (id) => {
+  const handleAddToList =  (id) => {
     const movie = results.find((result) => result.id === id)
+    const userDoc = doc(db,"users", user.email)
     if(searchQuery.trim() !== ""){
       onAddToList(movie)
       setSearchQuery("")
@@ -36,13 +41,7 @@ const TopMoviesList = ({onAddToList,movies,onRemoveFromList}) => {
     setResults([])
   }
 
-  const handleAddToList2 = () => {   
-    if(searchQuery.trim() !== ""){
-      onAddToList({searchQuery})
-      setSearchQuery("")
-    }
-    setResults([])
-  }
+  
 
   const handleRemoveFromList = (index) => {
     onRemoveFromList(index, 'movies')
@@ -58,12 +57,7 @@ const TopMoviesList = ({onAddToList,movies,onRemoveFromList}) => {
           onChange={handleSearch}
           className="border border-gray-300 rounded-md px-4 py-2 w-full"
           />
-          <button
-            onClick={handleAddToList2}
-            className="ml-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2"
-          >
-            +
-          </button>         
+                   
       </div>
       <div>
         {results.length > 0 && (

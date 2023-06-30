@@ -1,10 +1,14 @@
 import { useState } from "react";
 import List from "./List";
 import ResultCard from "./ResultCard";
+import { useSelector } from "react-redux";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
 const TopTvShowsList = ({movies, onAddToList,onRemoveFromList}) => {
   const [searchQuery, setSearchQuery] = useState("")
   const [results, setResults] = useState([])
+  const {user} = useSelector((store)=>store.user)
 
   const handleSearch = (event) => {
     const query = event.target.value
@@ -47,13 +51,7 @@ const TopTvShowsList = ({movies, onAddToList,onRemoveFromList}) => {
     setResults([])
   }
 
-  const handleAddToList2 = () => {   
-    if(searchQuery.trim() !== ""){
-      onAddToList({searchQuery})
-      setSearchQuery("")
-    }
-    setResults([])
-  }
+  
 
   const handleRemoveFromList = (index) => {
     onRemoveFromList(index, 'tvShows')
@@ -69,12 +67,7 @@ const TopTvShowsList = ({movies, onAddToList,onRemoveFromList}) => {
           onChange={handleSearch}
           className="border border-gray-300 rounded-md px-4 py-2 w-full"
           />
-          <button
-            onClick={handleAddToList2}
-            className="ml-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2"
-          >
-            +
-          </button>
+          
       </div>
       <div>
       {results.length > 0 && (

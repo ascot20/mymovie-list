@@ -44,7 +44,7 @@ const NavBar = () => {
             <li>
               <Link to={`explore`} className='text-slate-900 px-3 rounded-md block'>Explore</Link>
             </li>
-            <li className='text-slate-900 px-3 py-2 rounded-md block cursor-pointer' onClick={()=>auth.signOut()}>
+            <li className='text-slate-900 px-3 rounded-md block cursor-pointer' onClick={()=>auth.signOut()}>
               Log Out
             </li>
           </ul>
