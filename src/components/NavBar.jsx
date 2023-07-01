@@ -45,7 +45,7 @@ const NavBar = ({username,likes}) => {
         <div className="flex items-center justify-center space-x-2" onClick={toggleMenu}>          
           <img src={getRandomIcon()} alt="logo" className="w-7 cursor-pointer" />
           <p className="text-indigo-600 cursor-pointer">{username}</p>
-          <p className="cursor-pointer">❤️{likes}</p>
+          <p className={`cursor-pointer ${show?' text-slate-50' : 'text-slate-900'}`}>❤️{likes}</p>
         </div>
       </div>
       {hide || (
