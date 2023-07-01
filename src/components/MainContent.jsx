@@ -13,7 +13,7 @@ const MainContent = ({ selectedItem }) => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const userDoc = doc(db, "users", user.email)
+        const userDoc = doc(db, "users", user.uid)
         const userDocSnap = await getDoc(userDoc)
         const userDocData = userDocSnap.data()
         setMovies(userDocData.movies)
@@ -29,7 +29,7 @@ const MainContent = ({ selectedItem }) => {
   const handleAddToMovieList = (movie) => {
     if (movie.title.trim() !== '') {
       setMovies((prevMovies) => [...prevMovies, movie])
-      const userDoc = doc(db, "users", user.email)
+      const userDoc = doc(db, "users", user.uid)
       const addToFirestore = async () => {
         try {
           const userDocSnap = await getDoc(userDoc)
@@ -47,7 +47,7 @@ const MainContent = ({ selectedItem }) => {
   const handleAddToShowsList = (movie) => {
     if (movie.name.trim() !== '') {
       setTvShows((prevMovies) => [...prevMovies, movie])
-      const userDoc = doc(db, "users", user.email)
+      const userDoc = doc(db, "users", user.uid)
       const addToFirestore = async () => {
         try {
           const userDocSnap = await getDoc(userDoc)
@@ -69,7 +69,7 @@ const MainContent = ({ selectedItem }) => {
       case 'movies':
         const updatedMovies = movies.filter((_, i) => i !== index)
         setMovies(updatedMovies)
-        const userDoc = doc(db, "users", user.email)
+        const userDoc = doc(db, "users", user.uid)
         const removeFromFirestore = async () => {
           try {
             await updateDoc(userDoc, { movies: updatedMovies })
@@ -82,7 +82,7 @@ const MainContent = ({ selectedItem }) => {
       case 'tvShows':
         const updatedTvShows = tvShows.filter((_, i) => i !== index)
         setTvShows(updatedTvShows)
-        const userDoc2 = doc(db, "users", user.email)
+        const userDoc2 = doc(db, "users", user.uid)
         const removeFromTvFirestore = async () => {
           try {
             await updateDoc(userDoc2, { tvShows: updatedTvShows})

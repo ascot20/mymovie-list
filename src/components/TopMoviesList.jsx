@@ -1,14 +1,10 @@
 import { useState } from "react"
 import List from "./List"
 import ResultCard from "./ResultCard"
-import { doc, getDoc, updateDoc } from "firebase/firestore"
-import { db } from "../firebase"
-import { useSelector } from "react-redux"
 
 const TopMoviesList = ({onAddToList,movies,onRemoveFromList}) => {
   const [searchQuery, setSearchQuery] = useState("")
   const [results, setResults] = useState([])
-  const {user} = useSelector((store) => store.user)
 
   const handleSearch = (event) => {
     const query = event.target.value
@@ -33,7 +29,6 @@ const TopMoviesList = ({onAddToList,movies,onRemoveFromList}) => {
 
   const handleAddToList =  (id) => {
     const movie = results.find((result) => result.id === id)
-    const userDoc = doc(db,"users", user.email)
     if(searchQuery.trim() !== ""){
       onAddToList(movie)
       setSearchQuery("")

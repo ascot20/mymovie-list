@@ -1,14 +1,10 @@
 import { useState } from "react";
 import List from "./List";
 import ResultCard from "./ResultCard";
-import { useSelector } from "react-redux";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { db } from "../firebase";
 
 const TopTvShowsList = ({movies, onAddToList,onRemoveFromList}) => {
   const [searchQuery, setSearchQuery] = useState("")
   const [results, setResults] = useState([])
-  const {user} = useSelector((store)=>store.user)
 
   const handleSearch = (event) => {
     const query = event.target.value

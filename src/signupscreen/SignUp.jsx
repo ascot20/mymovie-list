@@ -18,7 +18,7 @@ const SignUp = () => {
         const email = emailRef.current.value
         createUserWithEmailAndPassword(auth, emailRef.current.value, passwordRef.current.value)
             .then((userCred) => {
-                const userCollection = doc(db, `users/${email}`)              
+                const userCollection = doc(db, `users/${userCred.user.uid}`)              
                 const createUser = async()=>{
                     try {
                         await setDoc(userCollection,{

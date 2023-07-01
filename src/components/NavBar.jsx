@@ -4,7 +4,7 @@ import logo from '../assets/profile.png'
 import { Link } from 'react-router-dom'
 import { auth } from '../firebase'
 
-const NavBar = () => {
+const NavBar = ({username,likes}) => {
   const [show, setShow] = useState(false)
   const [hide, setHide] = useState(true)
 
@@ -31,12 +31,14 @@ const NavBar = () => {
         <Link to={`/`}>        
         <h1 className={`${show ? ' text-slate-50' : 'text-slate-900'} font-mono cursor-pointer`}>MyMovieList🍿</h1>
         </Link>
-        <div className="flex items-center justify-center">          
-          <img src={logo} alt="logo" className="w-7 cursor-pointer" onClick={toggleMenu}/>
+        <div className="flex items-center justify-center space-x-2" onClick={toggleMenu}>          
+          <img src={logo} alt="logo" className="w-7 cursor-pointer" />
+          <p className="text-indigo-600 cursor-pointer">{username}</p>
+          <p className="cursor-pointer">❤️{likes}</p>
         </div>
       </div>
       {hide || (
-        <div className="fixed top-14 right-2 mt-2 bg-green-300 w-44 py-2 px-4 rounded-md">
+        <div className="fixed top-10 right-2 sm:right-4 mt-2 bg-blue-500 w-44 py-2 px-4 rounded-md">
           <ul className="flex flex-col space-y-2">
             <li>
               <Link to={`/`} className='text-slate-900 px-3 rounded-md block'>Home</Link>
