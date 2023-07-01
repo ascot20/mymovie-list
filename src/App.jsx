@@ -1,7 +1,6 @@
 import {BrowserRouter,Routes,Route} from "react-router-dom";
 import HomeScreen from './homescreen/HomeScreen.jsx';
 import ErrorScreen from './errorscreen/ErrorScreen';
-import Explore from './explorescreen/Explore';
 import Login from './loginscreen/Login';
 import {auth} from "./firebase.js"
 import { useEffect } from "react";
@@ -35,7 +34,6 @@ const App = () => {
       ):(
         <Routes>
         <Route path="/" element={<HomeScreen />} />
-        <Route path="/explore" element={<Explore />} />
         <Route path="/*" element={<ErrorScreen />} />
       </Routes>
         )}

@@ -55,10 +55,12 @@ const OtherUser = ({selectedUser}) => {
 
   return (
     <div>
-      <div className="relative bg-white shadow rounded-lg p-4 border border-slate-950">
-      <button className="text-xs absolute top-2 right-2" onClick={()=>setdisplayExplore(true)}>
+      <div className=" bg-white shadow rounded-lg p-4 border border-slate-950">
+        <div className=" flex items-center">
+      <button className=" text-xs ml-auto " onClick={()=>setdisplayExplore(true)}>
                 ❌
     </button>
+        </div>
     <div className="flex items-center mt-4">
       <h3 className="text-xl font-semibold">{selectedUser.username}</h3>
       <p className="ml-auto cursor-pointer" onClick={handleLiked}><span>{liked?'❤️': '🤍'}</span></p>

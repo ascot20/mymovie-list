@@ -21,8 +21,7 @@ const Explore = () => {
         const usersCollection = collection(db,"users")
         const usersQuery = query(
           usersCollection,
-          orderBy("likes","desc"),
-          limit(10)
+          orderBy("likes","desc")
         )
         const usersSnapshot = await getDocs(usersQuery)
         const usersData = usersSnapshot.docs.map((doc)=>doc.data())
