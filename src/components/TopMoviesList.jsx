@@ -55,7 +55,7 @@ const TopMoviesList = ({onAddToList,movies,onRemoveFromList}) => {
                    
       </div>
       <div>
-        {results.length > 0 && (
+        {(results.length > 0 && searchQuery) && (
           <div className="mb-4">
             <h3 className="text-lg font-semibold mb-2">Search Results</h3>
             <ul className="bg-white border border-gray-300 p-4 bg-gradient-to-b from-transparent to-gray-200 bg-contain bg-repeat-y">

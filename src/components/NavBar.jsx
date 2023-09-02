@@ -44,12 +44,12 @@ const NavBar = ({username,likes}) => {
         </Link>
         <div className="flex items-center justify-center space-x-2" onClick={toggleMenu}>          
           <img src={getRandomIcon()} alt="logo" className="w-7 cursor-pointer" />
-          <p className="text-indigo-600 cursor-pointer">{username}</p>
+          <p className="text-indigo-600 cursor-pointer overflow-clip whitespace-nowrap max-w-[120px]">{username}</p>
           <p className={`cursor-pointer ${show?' text-slate-50' : 'text-slate-900'}`}>❤️{likes}</p>
         </div>
       </div>
       {hide || (
-        <div className="fixed top-10 right-2 sm:right-4 mt-2 bg-blue-500 w-44 py-2 px-4 rounded-md">
+        <div className="fixed top-10 right-2 sm:right-4 mt-2 bg-green-300 w-44 py-2 px-4 rounded-md">
           <ul className="flex flex-col space-y-2">
             <li className='text-slate-900 px-3 rounded-md block cursor-pointer' onClick={()=>auth.signOut()}>
               Log Out

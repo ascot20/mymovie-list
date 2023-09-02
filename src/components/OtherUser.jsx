@@ -62,7 +62,7 @@ const OtherUser = ({selectedUser}) => {
     </button>
         </div>
     <div className="flex items-center mt-4">
-      <h3 className="text-xl font-semibold">{selectedUser.username}</h3>
+      <h3 className="text-xl font-semibold overflow-clip whitespace-nowrap max-w-[120px]">{selectedUser.username}</h3>
       <p className="ml-auto cursor-pointer" onClick={handleLiked}><span>{liked?'❤️': '🤍'}</span></p>
     </div>
         <h3 className=" font-mono text-sm mt-4">Top Movies</h3>

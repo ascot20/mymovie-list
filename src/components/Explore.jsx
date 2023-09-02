@@ -1,4 +1,4 @@
-import { collection, getDocs, limit, orderBy, query } from "firebase/firestore"
+import { collection, getDocs,orderBy, query } from "firebase/firestore"
 import { useEffect, useState } from "react"
 import { db } from "../firebase"
 import profile from '../assets/profile.png'
@@ -10,7 +10,7 @@ import profile5 from '../assets/profile5.png'
 import User from "./User"
 import OtherUser from "./OtherUser"
 
-const Explore = () => {
+function Explore() {
   const [users, setUsers] = useState([])
   const [selectedUser, setSelectedUser] = useState(null)
   const [displayOtherUser, setDisplayOtherUser] = useState(false)

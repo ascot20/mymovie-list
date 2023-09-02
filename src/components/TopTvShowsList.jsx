@@ -25,7 +25,6 @@ const TopTvShowsList = ({movies, onAddToList,onRemoveFromList}) => {
       .then(data=>{
         if(!data.error){
           setResults(data.results)
-          console.log(results)
         }
         else{
                 setResults([])
